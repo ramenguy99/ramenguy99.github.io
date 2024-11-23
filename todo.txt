@@ -1,0 +1,12 @@
+[x] Fix posts not showing up
+[x] Fix homepage to enter to long form post lists
+[x] Add math
+[x] Add socials to header
+[ ] Change color style?
+[x] Add RSS, plugin?
+[ ] Add more socials (mastodon / bluesky)
+[ ] Fix url (remove /blog) -> probably in deploy script?
+
+[ ] Content:
+    [ ] about
+    [ ] name

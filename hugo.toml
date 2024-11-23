@@ -1,0 +1,78 @@
+baseURL = 'https://ramenguy99.github.io/'
+title = 'Radiator Springs'
+languagecode = 'en-us'
+defaultcontentlanguage = 'en-us'
+theme = 'hugo-coder'
+
+[services]
+
+# [markup.highlight]
+# style = "github-dark"
+
+[params]
+  author = "Dario Mylonopoulous"
+  info = "All things graphics, performance and ramen"
+  description = "Dario's personal website"
+  keywords = "blog,personal,graphics,performance"
+  # avatarurl = "images/avatar.jpg"
+
+  # faviconSVG = "/img/favicon.svg"
+  # favicon_32 = "/img/favicon-32x32.png"
+  # favicon_16 = "/img/favicon-16x16.png"
+
+  since = 2024
+
+  colorScheme = "auto"
+  hidecolorschemetoggle = false
+
+  # customCSS = ["css/custom.css"]
+  # customSCSS = ["scss/custom.scss"]
+  # customJS = ["js/custom.js"]
+
+  math = true
+
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+  author = "authors"
+
+# Social links
+[[params.social]]
+  name = "Github"
+  icon = "fa-brands fa-github"
+  weight = 1
+  url = "https://github.com/ramenguy99/"
+# [[params.social]]
+#   name = "Twitter"
+#   icon = "fa-brands fa-x-twitter"
+#   weight = 3
+#   url = "https://twitter.com/johndoe/"
+
+[[params.social]]
+name = "RSS"
+icon = "fa-solid fa-rss"
+weight = 2
+url = "/index.xml"
+rel = "alternate"
+type = "application/rss+xml"
+
+# Menu links
+[[menu.main]]
+  name = "Posts"
+  url  = "posts/"
+  weight = 1
+
+[[menu.main]]
+  name = "About"
+  url = "about/"
+  weight = 2
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
