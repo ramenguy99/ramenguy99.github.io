@@ -1,5 +1,5 @@
 baseURL = 'https://ramenguy99.github.io/'
-title = 'Radiator Springs'
+title = 'Dario Mylonopoulos'
 languagecode = 'en-us'
 defaultcontentlanguage = 'en-us'
 theme = 'hugo-coder'
@@ -17,8 +17,8 @@ theme = 'hugo-coder'
   # avatarurl = "images/avatar.jpg"
 
   # faviconSVG = "/img/favicon.svg"
-  # favicon_32 = "/img/favicon-32x32.png"
-  # favicon_16 = "/img/favicon-16x16.png"
+  favicon_32 = "/img/favicon-32x32.png"
+  favicon_16 = "/img/favicon-16x16.png"
 
   since = 2024
 
@@ -43,11 +43,16 @@ theme = 'hugo-coder'
   icon = "fa-brands fa-github"
   weight = 1
   url = "https://github.com/ramenguy99/"
-# [[params.social]]
-#   name = "Twitter"
-#   icon = "fa-brands fa-x-twitter"
-#   weight = 3
-#   url = "https://twitter.com/johndoe/"
+[[params.social]]
+  name = "Bluesky"
+  icon = "fa-brands fa-bluesky"
+  weight = 2
+  url = "https://bsky.app/profile/dmylo.bsky.social"
+[[params.social]]
+  name = "LinkedIn"
+  icon = "fa-brands fa-linkedin"
+  weight = 2
+  url = "https://www.linkedin.com/in/dario-mylonopoulos-a57872234"
 
 [[params.social]]
 name = "RSS"
@@ -64,9 +69,14 @@ type = "application/rss+xml"
   weight = 1
 
 [[menu.main]]
+  name = "Ramen"
+  url = "ramen/"
+  weight = 2
+
+[[menu.main]]
   name = "About"
   url = "about/"
-  weight = 2
+  weight = 3
 
 [markup]
   [markup.goldmark]

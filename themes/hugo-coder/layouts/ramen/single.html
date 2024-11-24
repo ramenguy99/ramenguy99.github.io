@@ -33,7 +33,7 @@
 
       <div class="post-content">
         {{ if .Params.featuredImage }}
-          <img width="0.2vw" src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
+          <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
         {{ end }}
         {{ .Content }}
       </div>

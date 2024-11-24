@@ -2,11 +2,22 @@
 [x] Fix homepage to enter to long form post lists
 [x] Add math
 [x] Add socials to header
-[ ] Change color style?
 [x] Add RSS, plugin?
-[ ] Add more socials (mastodon / bluesky)
-[ ] Fix url (remove /blog) -> probably in deploy script?
+[x] Fix url (remove /blog) -> probably in deploy script?
+[x] Add more socials (bluesky/linkedin)
+[x] Content:
+    [x] about
+    [x] name
+    [x] Favion
+    [x] Ramen
+    [ ] Posts
+[ ] Change color style?
 
-[ ] Content:
-    [ ] about
-    [ ] name
+Example of how to do math:
+
+\[
+\begin{aligned}
+KL(\hat{y} || y) &= \sum_{c=1}^{M}\hat{y}_c \log{\frac{\hat{y}_c}{y_c}} \\
+JS(\hat{y} || y) &= \frac{1}{2}(KL(y||\frac{y+\hat{y}}{2}) + KL(\hat{y}||\frac{y+\hat{y}}{2}))
+\end{aligned}
+\]

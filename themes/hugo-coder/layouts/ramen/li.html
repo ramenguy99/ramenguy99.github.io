@@ -1,0 +1,7 @@
+<li style="margin:2%">
+  <span class="date">{{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}</span>
+  <img style="width: 80vm; max-width: 5em" src="{{ .Params.thumbnail }}" alt="thumbnail">
+  <a style="padding-left: 2%" class="title" href="{{ .Params.externalLink | default .RelPermalink }}">
+    {{ .Title }}
+  </a>
+</li>

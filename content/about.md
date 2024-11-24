@@ -4,4 +4,10 @@ draft = false
 title = 'About'
 +++
 
-Hello fratelo
+My name is Dario Mylonopoulos, I am a software engineer at [Leica Geosystems](https://leica-geosystems.com/) working on firmware for 3D scanners, previously I was an intern in the rendering group at [Disney Research](https://studios.disneyresearch.com/) in Zurich focusing on monte carlo light transport for offline rendering.
+
+I am interested in all things related to computer graphics, systems and performance.
+I (plan to) [blog](/posts) about random projects and interesting things I come across related to these topics.
+I (not often enough) cook [ramen](/ramen) with family and friends and post pictures of it here!
+
+You can reach out to me on [Github](https://github.com/ramenguy99), [Bluesky](https://bsky.app/profile/dmylo.bsky.social) and [Linkedin](https://www.linkedin.com/in/dario-mylonopoulos-a57872234)
