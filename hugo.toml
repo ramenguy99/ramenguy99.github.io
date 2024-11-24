@@ -10,10 +10,10 @@ theme = 'hugo-coder'
 # style = "github-dark"
 
 [params]
-  author = "Dario Mylonopoulous"
-  info = "All things graphics, performance and ramen"
-  description = "Dario's personal website"
-  keywords = "blog,personal,graphics,performance"
+  author = "Dario Mylonopoulos"
+  info = ""
+  description = ""
+  keywords = "blog,personal,graphics,system,performance,ramen"
   # avatarurl = "images/avatar.jpg"
 
   # faviconSVG = "/img/favicon.svg"
@@ -53,14 +53,13 @@ theme = 'hugo-coder'
   icon = "fa-brands fa-linkedin"
   weight = 2
   url = "https://www.linkedin.com/in/dario-mylonopoulos-a57872234"
-
 [[params.social]]
-name = "RSS"
-icon = "fa-solid fa-rss"
-weight = 2
-url = "/index.xml"
-rel = "alternate"
-type = "application/rss+xml"
+  name = "RSS"
+  icon = "fa-solid fa-rss"
+  weight = 2
+  url = "/index.xml"
+  rel = "alternate"
+  type = "application/rss+xml"
 
 # Menu links
 [[menu.main]]
