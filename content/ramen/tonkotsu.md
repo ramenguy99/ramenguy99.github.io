@@ -7,7 +7,7 @@ thumbnail = 'tonkotsu/thumbnail_small.jpeg'
 
 ![thumbnail: tonkotsu ramen](thumbnail.jpeg)
 
-This was a really long preparation (12 hours just for the broth), and it was also a gluten free recipe!
+This was a really long preparation (12 hours just for the broth), and it was also a gluten free recipe.
 It was also my first time making chashu, and cooking ramen more than two servings.
 
 ### Pictures
