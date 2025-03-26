@@ -292,7 +292,7 @@ There are two main advantages with this approach, first we can free up CPU cycle
 ### 4. Asynchronous copy on compute queue
 
 Here is where things get interesting, in the synchronous copy case we are executing both the copy and draw command on the same command queue, but a Vulkan device can expose multiple queues that can execute independent streams of commands concurrently. The idea here is to use two queues to overlap the streaming of data and rendering. Within a frame we need rendering to wait for the upload to happen, but we can start uploading the buffer for the next frame while we are rendering the current one.
-s
+
 Setup remains similar to the synchronous case, with the additional step of allocating a second queue and a few pairs of semaphores.  The main loop is now a bit more involved, as we need to deal with synchronization across multiple queues.
 
 ```c++

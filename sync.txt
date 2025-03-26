@@ -1,0 +1,116 @@
+Notes on synchronization:
+Synchronization in different graphics APIs:
+
+- Cuda:
+    streams:
+        - Legacy default stream is always synchronous with respect to host and other streams
+            -> this is a special stream that always syncs (handle = 0)
+            -> can be subsituted with per-thread default stream with no extra sync behavior by passing flag to nvcc
+        - Other streams behave like this:
+            - device:
+                - commands within a stream are always sequential and synchronized (no need for explicit exec sync / )
+                - commands across streams require explicit synchronization
+            - host:
+                - default stream always synchronizes with host, others have to be manually waited on (or synced with events)
+    events:
+        - device to device synchronization across streams: record (signal) / wait
+        - device to host synchronization (host can wait on events too)
+        - can also be used to compute elapsed time on host
+    caches:
+        - never need to flush device caches between device operations (either already coherent or implicit in kernel launches)
+    graphs:
+        - plays back pre-recorded streams of commands (also on multiple GPUs)
+        - no host sync allowed, but events on streams are allowed (obv no default stream because that implies host sync)
+    cudaMallocManaged:
+        - pre-Pascal:
+            - for single GPU or P2P gpus driver simulates this by allocating memory on device
+            - for no P2P multi gpu driver allocates host memory directly
+            - host reads page fault and driver transfers pages from device to host
+            - host writes are done to host memory
+            - kernel launches copy all host writes to GPU (gpu cannot do reads on page faults)
+        - post-Pascal:
+            - same as above but device reads/writes trigger pagefaults, halt execution and transfer pages to device
+            - prefetching / migration can be done with cudaMemPrefetchAsync
+        - unified address space (only way to use BAR memory on GPUs)    
+    cudaHostMalloc/cudaHostAlloc(same but with flags, e.g. mapped/writecombining/any cuda context):
+        - alloc device visible, pinned, host memory. I assume driver can use copyqueues / gpu copies on this memory (needs to be verified)
+    bar:
+        - no way to do this, there is some support related to RDMA, but this is mostly for NICs / other devices writing to GPU memory
+- Vulkan:
+    queues:
+        - device:
+            - commands within a queue can overlap (but don't on nvidia for example), requires explicit barriers
+            - commands across queues can overlap (and usually do, e.g. async compute, async copy), requires semaphores for sync, and cross queue barriers for transfer / caches
+        - host:
+            - submission implicitly flushes host/device caches
+    barriers: 
+        - within queue execution sync + device caches
+        - cross queue resource transfer + execution sync + device caches
+        - for images also handles layout transitions if needed have to manually specify stages/access/layout
+    events: split barriers same as barriers but with different start / end position within command buffer
+    semaphores: cross queue device/device execution sync
+    fences: host/device execution sync
+    timeline semaphore: counter instead of binary, can also be waited by host (similar to cuda events but with counter instead of binary)
+    flush/invalidate commands: host/device caches, not needed if memory is host_coherent
+- D3D12:
+    queues:
+        - device:
+            - automatic resource promotion on queue submit
+            - commands within a queue can overlap (same as vulkan)
+            - commands across queues can overlap (same as vulkan)
+        - host:
+            - memory is coherent by default, no need for explicit flushing
+    - barriers:
+        3 types:
+        - Resource Transition Barier:
+            - same as vulkan barriers, within queue execution sync + device caches
+            - only specify usage, this likely implies stages/access/layout
+        - UAV:
+            - execution memory barrier, without state transition, only need to specify resource
+        - ALIASING:
+            - needed when same memory used for multiple resources, need to specify before/after resource (on vulkan done by layout transition from undefined to actual usage)
+        no need to specify stages, only usage
+    - split barriers: same as vulkan events
+    - Fence: host device sync and device/device (similar to vulkan timeline semaphores, similar to cuda events but with counter instead of binary)
+- D3D11:
+    - host/device sync is done through explicit map/unmap, no persistent map available
+    - device/device is all driver managed
+    - ID3D11Fence: allows device / host sync, only useful for d3d12 interop?
+- OpenGL:
+    - host/device sync is normally done through map/unmap or glBufferData style copies, except when persistent mapping is used
+    glMemoryBarrier: 
+        - device execution sync + device caches
+        - needed to synchronize write to read dependencies between device operations (e.g. compute shader writes vertex buffer for read)
+    GLsync: device / host synchronization, useful for persistently mapped buffers (AZDO style)
+    glFlushMappedBufferRange: host/device caches, useful for persistently mapped buffer (AZDO style)
+
+<!-- I have been thinking a lot recently about API design for GPU synchronization,
+asking myself what is a good level of abstraction at which synchronization is
+not completely manual (and potentially hard and error prone) but that, at the
+same time, does not require sacrificing performance due to over-synchronization.
+
+There is a lot of material out there on this topic, but most of it
+is usually focusing on one specific API or comparing a few (e.g. D3D12 vs Vulkan
+is the classic). I was thinking it could be useful to summarize and put -->
+
+<!-- Recently I have been working on synchronization abstractions for different
+graphics and compute APIs, and this got me thinking about what is a good level
+of abstraction at which synchronization is not completely manual (and
+potentially hard and error prone) but that, at the same time, does not require
+sacrificing performance due to over-synchronization. -->
+
+
+<!-- Recently I have been working on synchronization abstractions for GPU accelerated
+graphics and compute. I wanted to map out the space of existing APIs starting
+from D3D11, D3D12, OpenGL, Vulkan and CUDA. -->
+
+<!-- TODO: fun intro about what this blog post is going to be about. -->
+
+<!-- KEEP THIS FOR NEXT POST ON RADV + NVK
+
+It's interesting that on a platform with a specific set of synchronization
+requirements at the hardware level, the manual work needed to write a
+correct program can vary so much depending on the API used. This means that
+either some APIs are asking you to specify way more information that is actually
+needed (looking at you Vulkan), or drivers are somehow inserting the missing
+pieces by keeping track of what you are doing behind the scenes. -->

@@ -4,7 +4,7 @@ draft = false
 title = 'About'
 +++
 
-My name is Dario Mylonopoulos, I am a software engineer at [Leica Geosystems](https://leica-geosystems.com/) working on firmware for 3D scanners, previously I was an intern in the rendering group at [Disney Research](https://studios.disneyresearch.com/) in Zurich focusing on monte carlo light transport for offline rendering.
+My name is Dario Mylonopoulos, I work as a software engineer at [Leica Geosystems](https://leica-geosystems.com/) on firmware for 3D scanners, previously I interned in the rendering group at [Disney Research](https://studios.disneyresearch.com/) in Zurich focusing on monte carlo light transport for offline rendering.
 
 I am interested in all things related to computer graphics, systems and performance.
 I sometimes [blog](/posts) about random projects and interesting things I come across.
